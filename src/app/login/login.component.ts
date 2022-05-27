@@ -19,10 +19,12 @@ export class LoginComponent implements OnInit {
   }
 
   loginUsers(){
+    localStorage.clear;
     this._service.loginUsersFromRemote(this.users).subscribe(
       data => {
-        //this.users=data;
         console.log("response recieved")
+        this.users=data;
+        localStorage.setItem("userId", JSON.stringify(this.users.id));
         this._router.navigate(['/home'])
 
       },
@@ -33,7 +35,7 @@ export class LoginComponent implements OnInit {
     )
   }
   gotoregistration(){
-    this._router.navigate(['/Registration'])
+    this._router.navigate(['/registration'])
   }
 
 }
